@@ -13,19 +13,15 @@ import static ru.strelchm.rabbitspring.MessagingConfig.*;
 @RestController
 @RequestMapping("/order")
 public class OrderPublisherController {
-
-    private final RabbitTemplate template;
+    private final OrderpublisherService service;
 
     @Autowired
-    public OrderPublisherController(RabbitTemplate template) {
-        this.template = template;
+    public OrderPublisherController(OrderpublisherService service) {
+        this.service = service;
     }
 
     @PostMapping("/{restaurantName}")
-    public String bookOrder(@RequestBody Order order, @PathVariable String restaurantName) {
-        order.setId(UUID.randomUUID());
-        OrderStatus orderStatus = new OrderStatus(order, "PROGRESS", "order placed successfully in restaurant " + restaurantName);
-        template.convertAndSend(QUEUE_EXCHANGE_NAME, QUEUE_BINDING_KEY, orderStatus);
-        return "SUCCESS";
+    public String bookOrder(@RequestBody Order order, @PathVariable String restaurantName) throws InterruptedException {
+        return service.bookOrder(order, restaurantName);
     }
 }
