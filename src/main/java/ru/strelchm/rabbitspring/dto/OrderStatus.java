@@ -1,4 +1,4 @@
-package ru.strelchm.rabbitspring;
+package ru.strelchm.rabbitspring.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package ru.strelchm.rabbitspring;
+package ru.strelchm.rabbitspring.config;
 
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
